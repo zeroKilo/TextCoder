@@ -1,0 +1,9 @@
+D:\CODE\c#\TextCoder\TextCoder\bin\Debug\TextCoder.exe.config
+D:\CODE\c#\TextCoder\TextCoder\bin\Debug\TextCoder.exe
+D:\CODE\c#\TextCoder\TextCoder\bin\Debug\TextCoder.pdb
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.Form1.resources
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.Properties.Resources.resources
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.Resources.resources
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.csproj.GenerateResource.Cache
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.exe
+D:\CODE\c#\TextCoder\TextCoder\obj\Debug\TextCoder.pdb
