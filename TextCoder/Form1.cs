@@ -38,23 +38,30 @@ namespace TextCoder
 
         private void runCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            parameters.ReferencedAssemblies.Clear();
-            foreach (string s in listBox1.Items)
-                parameters.ReferencedAssemblies.Add(s);
-            CompilerResults results = provider.CompileAssemblyFromSource(parameters, rtb1.Text);
-            rtb2.Text = "";
-            if (results.Errors.HasErrors)
+            try
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (CompilerError error in results.Errors)
-                    sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
-                rtb2.Text = sb.ToString();
-                return;
+                parameters.ReferencedAssemblies.Clear();
+                foreach (string s in listBox1.Items)
+                    parameters.ReferencedAssemblies.Add(s);
+                CompilerResults results = provider.CompileAssemblyFromSource(parameters, rtb1.Text);
+                rtb2.Text = "";
+                if (results.Errors.HasErrors)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (CompilerError error in results.Errors)
+                        sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
+                    rtb2.Text = sb.ToString();
+                    return;
+                }
+                rtb2.AppendText("Compiled successfully.\r\n");
+                Assembly assembly = results.CompiledAssembly;
+                Type program = assembly.GetType("Code.Program");
+                rtb4.Text = (string)program.GetMethod("Execute").Invoke(Activator.CreateInstance(program), new object[] { rtb3.Text });
             }
-            rtb2.AppendText("Compiled successfully.\r\n");
-            Assembly assembly = results.CompiledAssembly;
-            Type program = assembly.GetType("Code.Program");
-            rtb4.Text = (string)program.GetMethod("Execute").Invoke(Activator.CreateInstance(program), new object[] { rtb3.Text });
+            catch (Exception ex)
+            {
+                rtb4.Text = "An exception occured:\r\n" + ex.Message;
+            }
         }
 
         private void splitAndSortToolStripMenuItem_Click(object sender, EventArgs e)
